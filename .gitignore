@@ -1,12 +1,22 @@
+# Virtual environments
 .venv/
 __pycache__/
 *.pyc
+
+# Large generated data/results -- these belong on the shared filesystem,
+# not in git history. Regeneratable from scripts + raw data anyway.
 results/
 logs/
 data/
+
+# Embeddings and model artifacts (large binary files, git handles these poorly)
 *.npy
 *.npz
+
+# Credentials -- never commit these
 .env
 *token*
 *credential*
+
+# Jupyter checkpoints
 .ipynb_checkpoints/
