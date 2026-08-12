@@ -16,7 +16,7 @@ mkdir -p logs results/wsi_embeddings
 export HF_HOME=/lustre/nvwulf/scratch/cnwakeze/hf_cache
 export HF_TOKEN=$(cat ~/.cache/huggingface/token)
 
-python scripts/wsi_generate_embeddings.py \
+python scripts/wsi/wsi_generate_embeddings.py \
     --manifest results/wsi/wsi_manifest.csv \
     --model uni \
     --outdir results/wsi_embeddings \

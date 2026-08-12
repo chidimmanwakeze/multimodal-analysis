@@ -19,7 +19,7 @@ mkdir -p logs results/radiology_embeddings
 export TORCH_HOME=/lustre/nvwulf/scratch/cnwakeze/torch_cache
 mkdir -p "$TORCH_HOME"
 
-python scripts/radiology_generate_embeddings.py \
+python scripts/radiology/radiology_generate_embeddings.py \
     --imaging-metadata imaging-metadata.csv \
     --clinical clinical-data.tsv \
     --model radimagenet-densenet121 \

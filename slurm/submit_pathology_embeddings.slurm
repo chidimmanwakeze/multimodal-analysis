@@ -31,7 +31,7 @@ MODEL=${MODELS[$MODEL_IDX]}
 
 echo "Task $SLURM_ARRAY_TASK_ID -> serialization=$SERIALIZATION model=$MODEL"
 
-python scripts/pathology_generate_embeddings.py \
+python scripts/pathology/pathology_generate_embeddings.py \
     --extracted results/pathology_json/pathology_extracted.jsonl \
     --clinical clinical-data.tsv \
     --serialization "$SERIALIZATION" \

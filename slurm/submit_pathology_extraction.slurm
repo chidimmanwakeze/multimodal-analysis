@@ -50,7 +50,7 @@ echo "Pulling model: $MODEL"
 ollama pull "$MODEL"
 
 echo "Starting pathology extraction..."
-python scripts/pathology_extract.py \
+python scripts/pathology/pathology_extract.py \
     --input data/pathology-reports-brca.csv \
     --output results/pathology_json/pathology_extracted.jsonl \
     --model "$MODEL" \

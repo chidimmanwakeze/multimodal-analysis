@@ -19,8 +19,8 @@ export TRANSFORMERS_OFFLINE=1
 
 # EDIT this list to match whatever's actually still missing after checking
 # `ls results/pathology_embeddings/json/` and `.../template/`
-python scripts/pathology_generate_embeddings.py --extracted results/pathology_json/pathology_extracted.jsonl --clinical clinical-data.tsv --serialization json --model biobert --outdir results/pathology_embeddings/json
-python scripts/pathology_generate_embeddings.py --extracted results/pathology_json/pathology_extracted.jsonl --clinical clinical-data.tsv --serialization json --model scibert --outdir results/pathology_embeddings/json
-python scripts/pathology_generate_embeddings.py --extracted results/pathology_json/pathology_extracted.jsonl --clinical clinical-data.tsv --serialization template --model biobert --outdir results/pathology_embeddings/template
+python scripts/pathology/pathology_generate_embeddings.py --extracted results/pathology_json/pathology_extracted.jsonl --clinical clinical-data.tsv --serialization json --model biobert --outdir results/pathology_embeddings/json
+python scripts/pathology/pathology_generate_embeddings.py --extracted results/pathology_json/pathology_extracted.jsonl --clinical clinical-data.tsv --serialization json --model scibert --outdir results/pathology_embeddings/json
+python scripts/pathology/pathology_generate_embeddings.py --extracted results/pathology_json/pathology_extracted.jsonl --clinical clinical-data.tsv --serialization template --model biobert --outdir results/pathology_embeddings/template
 
 echo "Done."

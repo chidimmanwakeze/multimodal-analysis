@@ -25,7 +25,7 @@ MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
 
 echo "Task $SLURM_ARRAY_TASK_ID -> model: $MODEL"
 
-python scripts/generate_embeddings.py \
+python scripts/clinical/generate_embeddings.py \
     --model "$MODEL" \
     --tsv clinical-data.tsv \
     --outdir results/embeddings
