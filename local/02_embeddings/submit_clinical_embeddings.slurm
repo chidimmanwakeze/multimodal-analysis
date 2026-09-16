@@ -9,25 +9,26 @@
 #SBATCH --mem=25g
 #SBATCH --gpus=1
 #SBATCH --time=02:00:00
-#SBATCH -p b40x4                          # 9 nodes as of last check; switch to h200x4/h200x8 if you need more VRAM
+#SBATCH -p b40x4                          # 11 nodes as of last check; switch to h200x4/h200x8 if you need more VRAM
+
+# Always run relative to this script's own folder
+cd "/lustre/nvwulf/projects/KurcGroup-nvwulf/cnwakeze/multimodal-analysis-local/02_embeddings"
 
 set -euo pipefail
 mkdir -p logs results/embeddings
 
-# --- EDIT: load/activate your environment ---
-# module load anaconda3
-# conda activate honeybee-env
-# or, if HoneyBee lives in your home dir venv:
-# source /lustre/nvwulf/home/cnwakeze/venvs/honeybee/bin/activate
+# --- Activate the environment ---
+source /lustre/nvwulf/software/miniconda3/etc/profile.d/conda.sh
+conda activate honeybee
 
 MODELS=(bioclinicalbert pubmedbert biobert scibert sentence-transformers)
 MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
 
 echo "Task $SLURM_ARRAY_TASK_ID -> model: $MODEL"
 
-python scripts/generate_embeddings.py \
+python clinical_generate_embeddings.py \
     --model "$MODEL" \
-    --tsv clinical-data.tsv \
+    --tsv ../00_raw_data/clinical/clinical_data.tsv \
     --outdir results/embeddings
 
 echo "Finished model: $MODEL"

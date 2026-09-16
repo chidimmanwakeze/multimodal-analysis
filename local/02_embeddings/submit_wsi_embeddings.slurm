@@ -10,13 +10,16 @@
 #SBATCH --time=08:00:00
 #SBATCH -p b40x4
 
+# Always run relative to this script's own folder
+cd "/lustre/nvwulf/projects/KurcGroup-nvwulf/cnwakeze/multimodal-analysis-local/02_embeddings"
+
 set -euo pipefail
 mkdir -p logs results/wsi_embeddings
 
 export HF_HOME=/lustre/nvwulf/scratch/cnwakeze/hf_cache
 export HF_TOKEN=$(cat ~/.cache/huggingface/token)
 
-python scripts/wsi_generate_embeddings.py \
+python scripts/wsi/wsi_generate_embeddings.py \
     --manifest results/wsi/wsi_manifest.csv \
     --model uni \
     --outdir results/wsi_embeddings \

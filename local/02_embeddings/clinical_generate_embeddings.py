@@ -30,8 +30,9 @@ import numpy as np
 import pandas as pd
 from honeybee import HoneyBee
 
-
+# ---------------------------------------------------------------------------
 # Leakage-prevention column lists (carried over from generate_embeddings.ipynb)
+# ---------------------------------------------------------------------------
 
 TARGET_COLUMNS = [
     "Tumor Type",

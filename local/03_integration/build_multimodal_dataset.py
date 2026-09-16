@@ -26,9 +26,9 @@ from pathlib import Path
 import numpy as np
 
 MODALITY_DEFAULTS = {
-    "clinical": {"dir": "clinical/results/embeddings", "model": "sentence-transformers"},
-    "pathology": {"dir": "pathology/results/pathology_embeddings/json", "model": "sentence-transformers"},
-    "radiology": {"dir": "radiology/results/radiology_embeddings", "model": "radimagenet-densenet121"},
+    "clinical": {"dir": "../02_embeddings/results/embeddings", "model": "sentence-transformers"},
+    "pathology": {"dir": "../02_embeddings/results/pathology_embeddings/json", "model": "sentence-transformers"},
+    "radiology": {"dir": "../02_embeddings/results/radiology_embeddings", "model": "radimagenet-densenet121"},
 }
 
 
