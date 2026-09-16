@@ -10,14 +10,17 @@
 #SBATCH --time=08:00:00
 #SBATCH -p b40x4
 
+# Always run relative to this script's own folder
+cd "$SLURM_SUBMIT_DIR"
+
 set -euo pipefail
 mkdir -p logs results/wsi_embeddings
 
 export HF_HOME=/lustre/nvwulf/scratch/cnwakeze/hf_cache
 export HF_TOKEN=$(cat ~/.cache/huggingface/token)
 
-python scripts/wsi/wsi_generate_embeddings.py \
-    --manifest results/wsi/wsi_manifest.csv \
+python wsi_generate_embeddings.py \
+    --manifest ../01_extraction/results/wsi/wsi_manifest.csv \
     --model uni \
     --outdir results/wsi_embeddings \
     --max-patches-per-slide 500

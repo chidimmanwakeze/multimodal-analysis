@@ -10,8 +10,15 @@
 #SBATCH --time=04:00:00
 #SBATCH -p b40x4
 
+# Always run relative to this script's own folder
+cd "$SLURM_SUBMIT_DIR"
+
 set -euo pipefail
 mkdir -p logs results/radiology_embeddings
+
+# --- Activate the environment (has torch, radimagenet, etc.) ---
+source /lustre/nvwulf/software/miniconda3/etc/profile.d/conda.sh
+conda activate honeybee
 
 # Redirect torch's model cache to scratch -- same quota lesson as HF_HOME and
 # OLLAMA_MODELS earlier. Only 30MB for densenet121 in testing, but no reason
@@ -19,9 +26,9 @@ mkdir -p logs results/radiology_embeddings
 export TORCH_HOME=/lustre/nvwulf/scratch/cnwakeze/torch_cache
 mkdir -p "$TORCH_HOME"
 
-python scripts/radiology/radiology_generate_embeddings.py \
-    --imaging-metadata imaging-metadata.csv \
-    --clinical clinical-data.tsv \
+python radiology_generate_embeddings.py \
+    --imaging-metadata ../00_raw_data/radiology/radiology_metadata.csv \
+    --clinical ../00_raw_data/clinical/clinical_data.tsv \
     --model radimagenet-densenet121 \
     --outdir results/radiology_embeddings \
     --max-filesize 300000000

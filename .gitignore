@@ -20,3 +20,7 @@ data/
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
+
+# Raw data -- lives only on the cluster filesystem, never in git.
+# See README for how to populate this yourself.
+00_raw_data/

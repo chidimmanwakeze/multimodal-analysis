@@ -10,11 +10,14 @@
 #SBATCH --time=04:00:00
 #SBATCH -p b40x4
 
+# Always run relative to this script's own folder
+cd "$SLURM_SUBMIT_DIR"
+
 set -euo pipefail
 mkdir -p logs results/pathology_json
 
-# --- EDIT: load Ollama module (check exact name with `module avail ollama`) ---
-module load ollama
+# --- Pin an explicit Ollama version rather than whatever "ollama" defaults to ---
+module load ollama/0.19.0
 
 # Keep Ollama's model weights on scratch, NOT home -- home quota is 20GB and
 # a single 8B model's weights alone can be several GB. Same lesson as the
@@ -50,8 +53,8 @@ echo "Pulling model: $MODEL"
 ollama pull "$MODEL"
 
 echo "Starting pathology extraction..."
-python scripts/pathology/pathology_extract.py \
-    --input data/pathology-reports-brca.csv \
+python pathology_extract.py \
+    --input ../00_raw_data/pathology/pathology-reports-brca.csv \
     --output results/pathology_json/pathology_extracted.jsonl \
     --model "$MODEL" \
     --host http://localhost:11434 \
