@@ -7,15 +7,16 @@ classifier on the combined multimodal representation.
 ## Pipeline stages
 
 ```
-01_extraction/   raw data --> structured/manifest data
+01_extraction/    raw data --> structured/manifest data
 02_embeddings/    structured data --> numeric embeddings (per modality)
 03_integration/   merge embeddings across modalities into one dataset
 04_modeling/      train + select the classifier
 05_analysis/      post-hoc evaluation, clustering, comparisons
 ```
 
-Each stage's SLURM launcher lives in `slurm/<stage>/`, mirroring
-`scripts/<stage>/`.
+Each stage folder holds both its Python script(s) and the matching SLURM
+launcher(s) together -- e.g. `01_extraction/pathology_extract.py` and
+`01_extraction/submit_pathology_extraction.slurm` sit side by side.
 
 ## Modalities
 
@@ -67,7 +68,7 @@ this cluster) and a local `llama3.1:8b` model pull.
 Submit each SLURM script **from within its own stage folder** -- e.g.:
 
 ```bash
-cd slurm/01_extraction
+cd 01_extraction
 sbatch submit_pathology_extraction.slurm
 ```
 
